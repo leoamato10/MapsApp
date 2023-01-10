@@ -1,15 +1,10 @@
 import React, { useContext } from 'react';
 import { Modal, StyleSheet, View, ScrollView } from 'react-native';
-import { DataContext } from '../../Context/DataContext';
-import ModalHeader from './ModalHeader';
-import ModalCarrousel from './ModalCarrousel';
-import ModalAudio from './ModalAudio';
-import ModalMap from './ModalMap';
-import ModalEvents from './ModalEvents';
+import { ModalContext } from '../../Context/ModalContext';
+import { ModalAudio, ModalCarrousel, ModalEvents, ModalMap, ModalHeader } from "./"
 
 const ModalScreen = () => {
-  const data = useContext(DataContext);
-  const { modalVisible, selectedMarker } = data;
+  const { modalVisible, selectedMarker } = useContext(ModalContext);
   const {
     category,
     name,

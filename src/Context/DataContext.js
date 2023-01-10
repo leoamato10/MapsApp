@@ -1,47 +1,21 @@
 import React, { createContext, useState, useEffect } from 'react';
+import useFetch from '../Hooks/useFetch';
+import Error from "../Components/Error"
+import { API_URL } from "@env"
 
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false)
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMarker, setSelectedMarker] = useState({});
+  const { data, error, loading } = useFetch(`${API_URL}/districts/2`)
 
-  const apiCall = async () => {
-    try {
-      setLoading(true)
-      const resolve = await fetch(
-        `https://cityme-services.prepro.site/app_dev.php/api/districts/2`,
-      );
-      const result = await resolve.json();
-      setData(result);
-      setLoading(false)
-    } catch (error) {
-      alert("Error en llamar los datos")
-      setLoading(false)
-    }
-  };
+  console.log('data', data);
 
-  useEffect(() => {
-    apiCall();
-  }, []);
+  if (error) return <Error error={error} />
 
-  const handleModal = marker => {
-    setSelectedMarker(marker);
-    setModalVisible(!modalVisible);
-  };
+  const value = { data, loading }
 
   return (
-    <DataContext.Provider
-      value={{
-        data,
-        modalVisible,
-        setModalVisible,
-        selectedMarker,
-        handleModal,
-        loading
-      }}>
+    <DataContext.Provider value={value}>
       {children}
     </DataContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,27 +8,27 @@ import {
   Image,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {DataContext} from '../../Context/DataContext';
+import { ModalContext } from '../../Context/ModalContext';
 
-const PoisList = ({pois}) => {
-  const {handleModal} = useContext(DataContext);
+const PoisList = ({ pois }) => {
+  const { handleModal } = useContext(ModalContext);
 
   return (
     <FlatList
       data={pois}
-      renderItem={({item}) => {
+      renderItem={({ item }) => {
         return (
           <TouchableOpacity onPress={() => handleModal(item)}>
             <View style={styles.list}>
               <Image
-                source={{uri: item.image.url}}
+                source={{ uri: item.image.url }}
                 resizeMode={'cover'}
-                style={{width: 100, height: 80}}
+                style={{ width: 100, height: 80 }}
               />
               <View style={styles.title}>
                 <Text>{item.name}</Text>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={{paddingRight: 5}}> {item.likes_count}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={{ paddingRight: 5 }}> {item.likes_count}</Text>
                   <Ionicons name="heart" size={25} color="#cccccc" />
                 </View>
               </View>

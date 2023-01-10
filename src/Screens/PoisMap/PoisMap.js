@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { DataContext } from '../../Context/DataContext';
+import { ModalContext } from '../../Context/ModalContext';
 import MapView, {
   PROVIDER_GOOGLE,
   Marker,
@@ -16,7 +16,7 @@ const initialRegion = {
 }
 
 const PoisMap = ({ polygonCoords, pois }) => {
-  const { handleModal } = useContext(DataContext);
+  const { handleModal } = useContext(ModalContext);
 
   const mappedPolygonCoords = polygonCoords?.map(el => {
     const sp = el.split(',');
